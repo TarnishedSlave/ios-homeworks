@@ -11,7 +11,7 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
 
         let imageView = UIImageView(frame: rect)
-        imageView.image = UIImage(named: "boygirl")
+        imageView.image = UIImage(named: "photo")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = imageView.bounds.width / 2
         imageView.clipsToBounds = true

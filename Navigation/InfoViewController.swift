@@ -15,7 +15,7 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = .systemBackground
         view.addSubview(button)
         setupButton()
     }
