@@ -38,5 +38,4 @@ class FeedViewController: UIViewController {
             nextButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-
 }

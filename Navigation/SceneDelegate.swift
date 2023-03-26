@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          guard let scene = (scene as? UIWindowScene) else { return }
 
          let window = UIWindow(windowScene: scene)
+         
 
          let feedViewController = FeedViewController()
          feedViewController.view.backgroundColor = .systemBackground
@@ -25,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
          let profileViewController = ProfileViewController()
-         profileViewController.view.backgroundColor = .systemGray2
+         profileViewController.view.backgroundColor = .systemBackground
          profileViewController.title = "Профиль"
 
          let tabBarController = UITabBarController()
