@@ -3,61 +3,91 @@ import UIKit
 class ProfileHeaderView: UIView {
 
 
-    private let rect = CGRect(x: 16, y: 80, width: 150, height: 150)
-    private var statusText: String = ""
-    
+    private let avatarImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "avatar")
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.cornerRadius = 30
+            imageView.layer.masksToBounds = true
+            imageView.layer.borderWidth = 3
+            imageView.layer.borderColor = UIColor.white.cgColor
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+        private let nameLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Макс"
+            label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+            label.textColor = .black
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
 
-        let imageView = UIImageView(frame: rect)
-        imageView.image = UIImage(named: "photo")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = imageView.bounds.width / 2
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor.white.cgColor
+        private let statusLabel: UILabel = {
+            let label = UILabel()
+            label.text = "В ожидании статуса..."
+            label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+            label.textColor = .gray
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
 
-        let label1 = UILabel(frame: CGRect(x: rect.maxX + 30, y: rect.midY - 65, width: 100, height: 20))
-        label1.text = "Максим"
-        label1.font = UIFont.boldSystemFont(ofSize: 25)
+        private let button: UIButton = {
+            let button = UIButton()
+            button.backgroundColor = .systemBlue
+            button.setTitle("Покажи статус", for: .normal)
+            button.layer.cornerRadius = 4
+            button.layer.masksToBounds = false
+            button.layer.shadowOffset = CGSize(width: 4, height: 4)
+            button.layer.shadowRadius = 4
+            button.layer.shadowColor = UIColor.black.cgColor
+            button.layer.shadowOpacity = 0.7
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
 
-        let label2 = UILabel(frame: CGRect(x: rect.maxX + 30, y: rect.midY + 34, width: 200, height: 20))
-        label2.text = "Изучаю Swift"
-        label2.textColor = .systemGray
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            setupSubviews()
+        }
 
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 16, y: rect.maxY + 16, width: rect.maxY + 110, height: 50)
-        button.setTitle("Покажи статус", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 4
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
 
-        addSubview(imageView)
-        addSubview(label1)
-        addSubview(label2)
-        addSubview(button)
+        private func setupSubviews() {
+            addSubview(avatarImageView)
+            addSubview(nameLabel)
+            addSubview(statusLabel)
+            addSubview(button)
 
-    }
+            NSLayoutConstraint.activate([
+                avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+                avatarImageView.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
+                avatarImageView.widthAnchor.constraint(equalToConstant: 60),
+                avatarImageView.heightAnchor.constraint(equalToConstant: 60),
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+                nameLabel.topAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+                nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-    @objc private func buttonPressed() {
-        print("Button pressed")
+                statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+                statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+                statusLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
 
-        if let label2 = subviews.compactMap({ $0 as? UILabel }).first(where: { $0.text == "Изучаю Swift" }) {
-            label2.text = statusText
+                button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+                button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -34),
+                button.heightAnchor.constraint(equalToConstant: 50)
+            ])
+
+            button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        }
+
+        @objc private func buttonPressed() {
+            guard let statusText = statusLabel.text else { return }
+            print("Status text: \(statusText)")
         }
     }
-
-    func setStatusText(_ text: String) {
-        statusText = text
-    }
-}
