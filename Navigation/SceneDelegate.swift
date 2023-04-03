@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
          let profileViewController = ProfileViewController()
          profileViewController.view.backgroundColor = .lightGray
-         profileViewController.title = "Профиль"
+         profileViewController.navigationItem.title = "Профиль"
 
          let tabBarController = UITabBarController()
          feedViewController.tabBarItem = UITabBarItem.init(title: "Лента", image: UIImage(systemName: "list.bullet.rectangle"), tag: 0)

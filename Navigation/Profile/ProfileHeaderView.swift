@@ -88,7 +88,7 @@ class ProfileHeaderView: UIView {
         statusTextField.layer.borderColor = UIColor.black.cgColor
         statusTextField.borderStyle = .roundedRect
         statusTextField.placeholder = ""
-        statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+        //statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -111,27 +111,24 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
-            button.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            button.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            button.heightAnchor.constraint(equalToConstant: 50)
+            //button.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
+            button.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            button.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            button.heightAnchor.constraint(equalToConstant: 50),
+            button.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 30)
         ])
     }
 
 
-    @objc func statusTextChanged(_ statusTextField: UITextField) {
-        if let text = statusTextField.text {
-            statusText = text
-        } else {
-            statusText = ""
-        }
+    @objc func statusTextChanged() {
+
     }
 
     @objc func buttonPressed() {
-        statusText = statusTextField.text ?? ""
+
     }
 }
 
