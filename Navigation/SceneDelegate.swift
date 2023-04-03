@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -38,9 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
              UINavigationController(rootViewController: $0)
          }
          tabBarController.selectedIndex = 1
-         UITabBar.appearance().backgroundColor = .systemBrown
+         UITabBar.appearance().backgroundColor = .systemMint
          window.rootViewController = tabBarController
          window.makeKeyAndVisible()
+
+         
 
          self.window = window
      }

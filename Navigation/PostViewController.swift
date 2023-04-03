@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class PostViewController: UIViewController {
     let nextButton = UIButton()

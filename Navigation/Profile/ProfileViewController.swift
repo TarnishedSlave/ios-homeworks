@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class ProfileViewController: UIViewController {
 
@@ -14,8 +15,9 @@ class ProfileViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        let headerViewHeight: CGFloat = 220.0
-        let headerViewFrame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: headerViewHeight)
-        headerView.frame = headerViewFrame
+        //let headerViewHeight: CGFloat = 220.0
+        //let headerViewFrame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: headerViewHeight)
+        headerView.frame = view.bounds
     }
+ 
 }

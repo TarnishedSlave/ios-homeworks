@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class FeedViewController: UIViewController {
     let postScreen = PostViewController()
@@ -27,7 +28,7 @@ class FeedViewController: UIViewController {
         view.addSubview(nextButton)
 
         nextButton.configuration = .filled()
-        nextButton.configuration?.baseBackgroundColor = .systemPink
+        nextButton.configuration?.baseBackgroundColor = .systemBlue
         nextButton.addTarget(self, action: #selector(goToPostScreen), for: .touchUpInside)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
 
