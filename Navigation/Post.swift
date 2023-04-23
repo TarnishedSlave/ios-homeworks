@@ -7,6 +7,6 @@
 
 import UIKit
 
-struct Post {var title: objc_super}
-
-//fuck
+struct Post {
+    var title: String
+}

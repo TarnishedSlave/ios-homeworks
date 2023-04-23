@@ -6,45 +6,31 @@
 //
 
 import UIKit
-import SwiftUI
 
 class InfoViewController: UIViewController {
-    let button = UIButton(type: .system)
-    let alertTitle = "Заголовок"
-    let alertMessage = "Сообщение"
 
+    private lazy var button: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .red
+        button.layer.cornerRadius = 12
+        button.setTitle("Редактировать", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .systemBackground
-        view.addSubview(button)
+        view.backgroundColor = .green
         setupButton()
     }
-
     private func setupButton() {
-        button.setTitle("Показать alert", for: .normal)
-        button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        setupConstraint()
-    }
-
-    @objc private func showAlert() {
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _ in
-            print("Нажата кнопка 'Отмена'")
-        }
-        alert.addAction(cancelAction)
-        let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
-            print("Нажата кнопка 'ОК'")
-        }
-        alert.addAction(okAction)
-        present(alert, animated: true)
-    }
-
-    func setupConstraint() {
+        self.view.addSubview(self.button)
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            button.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            button.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
