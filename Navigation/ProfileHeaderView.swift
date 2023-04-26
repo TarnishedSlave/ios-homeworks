@@ -6,7 +6,7 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "avatar")
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 50
+        imageView.layer.cornerRadius = 40
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
@@ -70,6 +70,8 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureContents()
+
+        
         //backgroundColor = .systemGray6
     }
     func configureContents() {
@@ -105,7 +107,7 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
             setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 78),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     required init?(coder: NSCoder) {
@@ -116,6 +118,8 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
     @objc func statusTextChanged(_textField: UITextField) {
         statusLabel.text! = statusTextField.text!
+        setStatusButton.isHidden = statusTextField.text?.isEmpty ?? true
         print("Text changed \(statusLabel.text!)")
     }
+
 }

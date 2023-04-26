@@ -8,9 +8,12 @@
 import UIKit
 
 class ProfileTableHeaderView: UIViewController {
+
+    
     let header: ProfileHeaderView = {
         var header = ProfileHeaderView()
         header.translatesAutoresizingMaskIntoConstraints = false
+
         return header
     }()
 
@@ -23,6 +26,7 @@ class ProfileTableHeaderView: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .init(top: 20, left: 16, bottom: 20, right: 16)
         tableView.separatorColor = .gray
+
         return tableView
     }()
 
@@ -33,6 +37,7 @@ class ProfileTableHeaderView: UIViewController {
         setupTableView()
         tableView.dataSource = self
         tableView.delegate = self
+        self.navigationController?.navigationBar.isHidden = true
     }
     func setupUI() {
         view.addSubview(header)
@@ -40,7 +45,7 @@ class ProfileTableHeaderView: UIViewController {
             header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             header.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             header.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            header.heightAnchor.constraint(equalToConstant: 250),
+            header.heightAnchor.constraint(equalToConstant: 220),
 
         ])
     }

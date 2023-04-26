@@ -11,7 +11,7 @@ class InfoViewController: UIViewController {
 
     private lazy var button: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .darkGray
         button.layer.cornerRadius = 12
         button.setTitle("Редактировать", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -21,7 +21,7 @@ class InfoViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         setupButton()
     }
     private func setupButton() {
