@@ -8,18 +8,18 @@
 import UIKit
 
 struct Posts {
-    var author: String
-    var image = UIImage()
+    var author:      String
+    var image =      UIImage()
     var description: String
-    var likes: Int
-    var view: Int
+    var likes:       Int
+    var view:        Int
 }
 
 struct Description {
     static let sport = "I like basketball"
     static let books = "I like reading"
     static let games = "I like PS5"
-    static let car = "I like my car"
+    static let car   = "I like my car"
 }
 
 struct Source {

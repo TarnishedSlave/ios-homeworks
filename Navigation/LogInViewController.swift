@@ -30,28 +30,25 @@ class CustomButton: UIButton {
 
 class LogInViewController: UIViewController, UIScrollViewDelegate {
 
-    private lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView                = {
         let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator              = true
+        scrollView.showsHorizontalScrollIndicator            = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-    private lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView                 = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fillEqually
+        stackView.axis                                      = .vertical
+        stackView.alignment                                 = .center
+        stackView.distribution                              = .fillEqually
 
         stackView.addArrangedSubview(loginTextField)
         stackView.addArrangedSubview(passwordTextField)
         stackView.addArrangedSubview(buttonLogIn)
 
-        stackView.setCustomSpacing(120, after: logoImageView)
-        stackView.setCustomSpacing(0, after: loginTextField)
-        stackView.setCustomSpacing(16, after: passwordTextField)
-
+        stackView.setCustomSpacing(0.5, after: loginTextField)
         return stackView
     }()
     private let logoImageView: UIImageView = {
@@ -65,7 +62,7 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
         loginTextField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         loginTextField.textColor = .black
         loginTextField.tintColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
-        loginTextField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] //?
+        loginTextField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         loginTextField.layer.cornerRadius = 10
         loginTextField.layer.backgroundColor = UIColor.systemGray6.cgColor
         loginTextField.layer.borderWidth = 0.5
@@ -125,7 +122,7 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
         addSubview()
         setupContentOfScrollView()
         setupUI()
-        self.loginTextField.delegate = self
+        self.loginTextField.delegate    = self
         self.passwordTextField.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -152,27 +149,25 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
     }
     private func  setupContentOfScrollView() {
         for _ in 0...2 {
-            loginTextField.translatesAutoresizingMaskIntoConstraints = false
+            loginTextField.translatesAutoresizingMaskIntoConstraints    = false
             stackView.addSubview(loginTextField)
             passwordTextField.translatesAutoresizingMaskIntoConstraints = false
             stackView.addSubview(passwordTextField)
-            buttonLogIn.translatesAutoresizingMaskIntoConstraints = false
+            buttonLogIn.translatesAutoresizingMaskIntoConstraints       = false
             stackView.addSubview(buttonLogIn)
             if stackView.subviews.count > 0 {
                 let previousLabel = stackView.subviews.dropLast().last
                 previousLabel?.bottomAnchor.constraint(equalTo: passwordTextField.bottomAnchor).isActive = true
             } else {
-                loginTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor).isActive = true
+                loginTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor).isActive        = true
             }
         }
-        stackView.subviews.last?.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
+        stackView.subviews.last?.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive       = true
     }
     private func setupUI() {
         scrollView.addSubview(stackView)
         scrollView.addSubview(logoImageView)
         scrollView.addSubview(buttonLogIn)
-//        stackView.addArrangedSubview(loginTextField)
-//        stackView.addArrangedSubview(passwordTextField)
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -194,14 +189,10 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
             loginTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             loginTextField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginTextField.heightAnchor.constraint(equalToConstant: 50),
-            //loginTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
-            //loginTextField.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: 0),
 
             passwordTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
-//            passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 0),
-//            passwordTextField.bottomAnchor.constraint(equalTo: buttonLogIn.topAnchor, constant: -16),
 
             buttonLogIn.heightAnchor.constraint(equalToConstant: 50),
             buttonLogIn.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),

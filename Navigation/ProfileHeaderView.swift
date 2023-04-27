@@ -3,64 +3,64 @@ import UIKit
 final class ProfileHeaderView: UIView, UITextFieldDelegate {
 
     private let avatarImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "avatar")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 40
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor.white.cgColor
+        let imageView                        = UIImageView()
+        imageView.image                      = UIImage(named: "avatar")
+        imageView.contentMode                = .scaleAspectFill
+        imageView.layer.cornerRadius         = 40
+        imageView.layer.masksToBounds        = true
+        imageView.layer.borderWidth          = 3
+        imageView.layer.borderColor          = UIColor.white.cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
     private let fullNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Максим"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        let label                      = UILabel()
+        label.text                     = "Максим"
+        label.font                     = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.textColor                = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let statusLabel: UILabel = {
-        let label = UILabel()
-        label.text = "В ожидании..."
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .gray
+        let label                    = UILabel()
+        label.text                   = "В ожидании..."
+        label.font                   = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor              = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let statusTextField: UITextField = {
-        let text = UITextField()
-        text.placeholder = "Listening to music"
-        text.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        text.textColor = .black
-        text.layer.cornerRadius = 12
-        text.layer.backgroundColor = UIColor.white.cgColor
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.black.cgColor
+    private let statusTextField: UITextField           = {
+        let text                                       = UITextField()
+        text.placeholder                               = "Listening to music"
+        text.font                                      = UIFont.systemFont(ofSize: 15, weight: .regular)
+        text.textColor                                 = .black
+        text.layer.cornerRadius                        = 12
+        text.layer.backgroundColor                     = UIColor.white.cgColor
+        text.layer.borderWidth                         = 1
+        text.layer.borderColor                         = UIColor.black.cgColor
         text.translatesAutoresizingMaskIntoConstraints = false
-        let paddingView = UIView(frame: CGRectMake(0, 0, 14, 0))
-        text.leftView = paddingView
-        text.leftViewMode = UITextField.ViewMode.always
+        let paddingView                                = UIView(frame: CGRectMake(0, 0, 14, 0))
+        text.leftView                                  = paddingView
+        text.leftViewMode                              = UITextField.ViewMode.always
         return text
     }()
 
     private var statusText: String = ""
 
-    private let setStatusButton: UIButton = {
-        let button = UIButton()
+    private let setStatusButton: UIButton               = {
+        let button                                      = UIButton()
         button.setTitle("Set status", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.titleLabel?.font                         = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
+        button.backgroundColor                          = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
         button.titleLabel?.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.cornerRadius = 12
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
+        button.layer.shadowRadius                       = 4
+        button.layer.cornerRadius                       = 12
+        button.layer.shadowColor                        = UIColor.black.cgColor
+        button.layer.shadowOpacity                      = 0.7
         button.addTarget(nil, action: #selector(buttonPressed), for: .editingChanged)
         button.addTarget(nil, action: #selector(statusTextChanged), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
