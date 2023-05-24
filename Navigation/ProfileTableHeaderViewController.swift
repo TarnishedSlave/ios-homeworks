@@ -32,13 +32,20 @@ class ProfileTableHeaderView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        #if DEBUG
         view.backgroundColor = .white
+        #else
+        view.backgroundColor = .gray
+        #endif
+
         setupUI()
         setupTableView()
         tableView.dataSource = self
         tableView.delegate = self
         self.navigationController?.navigationBar.isHidden = true
     }
+    
     func setupUI() {
         view.addSubview(header)
         NSLayoutConstraint.activate([
