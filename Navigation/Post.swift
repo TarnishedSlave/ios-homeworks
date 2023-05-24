@@ -5,8 +5,8 @@
 //  Created by Максим Шагдыров on 08.03.2023.
 //
 
-import UIKit
-
-struct Post {
-    var title: String
-}
+//import UIKit
+//
+//struct Post {
+//    var title: String
+//}
