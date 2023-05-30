@@ -5,11 +5,15 @@
 //  Created by Максим Шагдыров on 23.04.2023.
 //
 
+import Foundation
 import UIKit
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
 
     static let id = "PostTableViewCell"
+    let imageProcessor = ImageProcessor()
+
     let author: UILabel     = {
         let label           = UILabel()
         label.font          = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -21,6 +25,7 @@ class PostTableViewCell: UITableViewCell {
         let image             = UIImageView()
         image.backgroundColor = .white
         image.contentMode     = .scaleAspectFit
+
         return image
     }()
     let descriptionLabel: UILabel = {
@@ -45,6 +50,7 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()
+
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -79,6 +85,7 @@ class PostTableViewCell: UITableViewCell {
             viewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             viewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -16)
         ])
+
     }
     func configure(posts: Posts) {
         author.text           = posts.author
@@ -86,5 +93,15 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.text = posts.description
         likesLabel.text       = "Likes: \(posts.likes)"
         viewLabel.text        = "Views: \(posts.view)"
+
+        imageProcessor.processImage(
+                sourceImage: posts.image,
+                filter: ColorFilter.noir) { [weak self] processedImage in
+                    DispatchQueue.main.async {
+                        self?.image.image = processedImage
+                    }
+                }
     }
+
+
 }
