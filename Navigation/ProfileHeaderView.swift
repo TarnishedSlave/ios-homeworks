@@ -2,6 +2,7 @@ import UIKit
 
 final class ProfileHeaderView: UIView, UITextFieldDelegate {
 
+    private var user: User?
     private let avatarImageView: UIImageView = {
         let imageView                        = UIImageView()
         imageView.image                      = UIImage(named: "avatar")
@@ -75,6 +76,13 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
         //backgroundColor = .systemGray6
     }
     func configureContents() {
+
+        if let user = user {
+                avatarImageView.image = user.avatar
+                fullNameLabel.text = user.fullName
+                statusLabel.text = user.status
+        }
+        
         addSubview(avatarImageView)
         addSubview(fullNameLabel)
         addSubview(statusLabel)

@@ -52,8 +52,7 @@ class ProfileTableHeaderView: UIViewController {
             header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             header.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             header.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            header.heightAnchor.constraint(equalToConstant: 220),
-
+            header.heightAnchor.constraint(equalToConstant: 220)
         ])
     }
     func setupTableView() {
@@ -62,7 +61,7 @@ class ProfileTableHeaderView: UIViewController {
             tableView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 12),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
