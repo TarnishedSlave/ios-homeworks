@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController =  createTabBarController()
+        window?.rootViewController = createTabBarController()
         window?.makeKeyAndVisible()
     }
 
@@ -30,7 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func createProfileViewController() -> UINavigationController {
-        let logInViewController = LogInViewController()
+        let userService = UserServiceImpl() // Create an instance of UserServiceImpl
+        let logInViewController = LogInViewController(userService: userService)
         logInViewController.tabBarItem = UITabBarItem(
             title: "Profile",
             image: UIImage(systemName: "person.fill"),
@@ -47,17 +48,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
-func sceneDidDisconnect(_ scene: UIScene) {
+// Remaining SceneDelegate methods...
+
+class UserServiceImpl: UserService {
+    init() {
+        // Perform any necessary initialization here
+    }
+
+    func getUser(withLogin login: String) -> User? {
+        // Implement the logic to fetch a user based on the login
+        // Return the user if found, or nil if not found
+        // Example implementation:
+
+        // Assuming you have an array of users called "users"
+        let user = users.first { $0.login == login }
+        return user
+    }
 }
 
-func sceneDidBecomeActive(_ scene: UIScene) {
-}
+// Create a placeholder array of users for testing purposes
+let users: [User] = [
+    User(login: "john", fullName: "John Doe", avatar: UIImage(named: "john_avatar"), status: "Active"),
+    User(login: "jane", fullName: "Jane Smith", avatar: UIImage(named: "jane_avatar"), status: "Inactive")
+]
 
-func sceneWillResignActive(_ scene: UIScene) {
-}
-
-func sceneWillEnterForeground(_ scene: UIScene) {
-}
-
-func sceneDidEnterBackground(_ scene: UIScene) {
-}

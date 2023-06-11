@@ -30,6 +30,8 @@ class CustomButton: UIButton {
 
 class LogInViewController: UIViewController, UIScrollViewDelegate {
 
+    private let userService: UserService
+
     private lazy var scrollView: UIScrollView                = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator              = true
@@ -115,6 +117,16 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
         button.clipsToBounds = true
         return button
     }()
+
+    init(userService: UserService) {
+            self.userService = userService
+            super.init(nibName: nil, bundle: nil)
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -140,10 +152,19 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scrollView.contentInset.bottom = 0.0
     }
+
     @objc func logIn(sender: UIButton) {
-        let profileVC = ProfileTableHeaderView()
-        self.navigationController?.pushViewController(profileVC, animated: true)
+        let login = loginTextField.text ?? ""
+        if let user = userService.getUser(withLogin: login) {
+            let profileVC = ProfileHeaderView()
+            profileVC.user = user
+
+        } else {
+            // Handle invalid login
+            print("Invalid login")
+        }
     }
+
     private func addSubview() {
         scrollView.addSubview(stackView)
     }

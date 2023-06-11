@@ -1,8 +1,42 @@
 import UIKit
 
+class User {
+    let login: String
+    let fullName: String
+    let avatar: UIImage?
+    let status: String
+
+    init(login: String, fullName: String, avatar: UIImage?, status: String) {
+        self.login = login
+        self.fullName = fullName
+        self.avatar = avatar
+        self.status = status
+    }
+}
+
+protocol UserService {
+    func getUser(withLogin login: String) -> User?
+}
+
+class CurrentUserService: UserService {
+    private var currentUser: User?
+
+    init(user: User?) {
+        self.currentUser = user
+    }
+
+    func getUser(withLogin login: String) -> User? {
+        guard login == currentUser?.login else {
+            return nil
+        }
+        return currentUser
+    }
+}
+
 final class ProfileHeaderView: UIView, UITextFieldDelegate {
 
-    private var user: User?
+    
+
     private let avatarImageView: UIImageView = {
         let imageView                        = UIImageView()
         imageView.image                      = UIImage(named: "avatar")
@@ -32,6 +66,20 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
+    var user: User? {
+            didSet {
+                if let user = user {
+                    fullNameLabel.text = user.fullName
+                    statusLabel.text = user.status
+                    avatarImageView.image = user.avatar
+                } else {
+                    fullNameLabel.text = nil
+                    statusLabel.text = nil
+                    avatarImageView.image = nil
+                }
+            }
+        }
 
     private let statusTextField: UITextField           = {
         let text                                       = UITextField()
@@ -77,12 +125,6 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
     func configureContents() {
 
-        if let user = user {
-                avatarImageView.image = user.avatar
-                fullNameLabel.text = user.fullName
-                statusLabel.text = user.status
-        }
-        
         addSubview(avatarImageView)
         addSubview(fullNameLabel)
         addSubview(statusLabel)
