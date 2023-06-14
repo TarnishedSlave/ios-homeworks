@@ -30,8 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func createProfileViewController() -> UINavigationController {
-        let userService = UserServiceImpl() // Create an instance of UserServiceImpl
-        let logInViewController = LogInViewController(userService: userService)
+
+        let logInViewController = LogInViewController(userService: CurrentUserService)
         logInViewController.tabBarItem = UITabBarItem(
             title: "Profile",
             image: UIImage(systemName: "person.fill"),
@@ -47,28 +47,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return tabBarController
     }
 }
-
-// Remaining SceneDelegate methods...
-
-class UserServiceImpl: UserService {
-    init() {
-        // Perform any necessary initialization here
-    }
-
-    func getUser(withLogin login: String) -> User? {
-        // Implement the logic to fetch a user based on the login
-        // Return the user if found, or nil if not found
-        // Example implementation:
-
-        // Assuming you have an array of users called "users"
-        let user = users.first { $0.login == login }
-        return user
-    }
-}
-
-// Create a placeholder array of users for testing purposes
-let users: [User] = [
-    User(login: "john", fullName: "John Doe", avatar: UIImage(named: "john_avatar"), status: "Active"),
-    User(login: "jane", fullName: "Jane Smith", avatar: UIImage(named: "jane_avatar"), status: "Inactive")
-]
-

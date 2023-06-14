@@ -154,14 +154,15 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
     }
 
     @objc func logIn(sender: UIButton) {
-        let login = loginTextField.text ?? ""
-        if let user = userService.getUser(withLogin: login) {
-            let profileVC = ProfileHeaderView()
-            profileVC.user = user
+
+        if let user = userService.getUser(withLogin: loginTextField.text ?? "") {
+            let profileVC = ProfileTableHeaderView()
+            navigationController?.setViewControllers([profileVC], animated: false)
 
         } else {
-            // Handle invalid login
-            print("Invalid login")
+            let alert = UIAlertController(title: "Unknown login", message: "Please, enter another login", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(alert, animated: true)
         }
     }
 
