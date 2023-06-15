@@ -1,7 +1,8 @@
 import UIKit
 
-final class ProfileHeaderView: UIView, UITextFieldDelegate {
+final class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
 
+    static let id = "ProfileHeaderViewID"
     private let avatarImageView: UIImageView = {
         let imageView                        = UIImageView()
         imageView.image                      = UIImage(named: "avatar")
@@ -81,13 +82,16 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
         return button
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         configureContents()
-
-        
-        //backgroundColor = .systemGray6
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func configureContents() {
 
         addSubview(avatarImageView)
@@ -125,9 +129,7 @@ final class ProfileHeaderView: UIView, UITextFieldDelegate {
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    
     @objc func buttonPressed(sender: UIButton) {
         print(statusText)
     }

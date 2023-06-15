@@ -10,6 +10,7 @@ import UIKit
 class PostTableViewCell: UITableViewCell {
 
     static let id = "PostTableViewCell"
+    
     let author: UILabel     = {
         let label           = UILabel()
         label.font          = UIFont.systemFont(ofSize: 20, weight: .bold)

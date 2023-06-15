@@ -30,8 +30,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func createProfileViewController() -> UINavigationController {
-
-        let logInViewController = LogInViewController(userService: CurrentUserService)
+        
+        let user = User(login: "max", fullName: "Max", avatar: UIImage(named: "magic")!, status: "active")
+        let userService = CurrentUserService(currentUser: user)
+        
+        let logInViewController = LogInViewController(userService: userService)
         logInViewController.tabBarItem = UITabBarItem(
             title: "Profile",
             image: UIImage(systemName: "person.fill"),
