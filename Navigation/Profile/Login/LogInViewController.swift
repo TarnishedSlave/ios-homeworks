@@ -12,6 +12,7 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Private properties
     
     private let userService: UserService
+    private var currentUser: User?
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -191,15 +192,18 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
     }
 
     @objc func logIn(sender: UIButton) {
-        if let _ = userService.getUser(withLogin: loginTextField.text ?? "") {
-            let profileVC = ProfileViewController()
+            guard let login = loginTextField.text, let user = userService.getUser(withLogin: login) else {
+                let alert = UIAlertController(title: "Unknown login", message: "Please enter a valid login", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                present(alert, animated: true)
+                return
+            }
+
+            currentUser = user
+
+            let profileVC = ProfileViewController(user: user)
             navigationController?.pushViewController(profileVC, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Unknown login", message: "Please, enter another login", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            self.present(alert, animated: true)
         }
-    }
     
 }
 

@@ -8,16 +8,16 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = createTabBarController()
         window?.makeKeyAndVisible()
     }
-
+    
     func createFeedViewController() -> UINavigationController {
         let feedViewController = FeedViewController()
         feedViewController.title = "Feed"
@@ -28,12 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         return UINavigationController(rootViewController: feedViewController)
     }
-
-    func createProfileViewController() -> UINavigationController {
-        
-        let user = User(login: "max", fullName: "Max", avatar: UIImage(named: "magic")!, status: "active")
-        let userService = CurrentUserService(currentUser: user)
-        
+    
+    func createProfileViewController(userService: UserService) -> UINavigationController {
         let logInViewController = LogInViewController(userService: userService)
         logInViewController.tabBarItem = UITabBarItem(
             title: "Profile",
@@ -42,11 +38,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         return UINavigationController(rootViewController: logInViewController)
     }
-
+    
     func createTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [createFeedViewController(), createProfileViewController()]
+        
+        let user = User(login: "max", fullName: "Max", avatar: UIImage(named: "magic")!, status: "active")
+        let userService = CurrentUserService(currentUser: user)
+        
+        tabBarController.viewControllers = [
+            createFeedViewController(),
+            createProfileViewController(userService: userService)
+        ]
+        
         UITabBar.appearance().backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        
         return tabBarController
     }
 }

@@ -34,9 +34,11 @@ class CurrentUserService{
 extension CurrentUserService: UserService {
     
     func getUser(withLogin login: String) -> User? {
-        guard login == currentUser.login else {
+        if login == "max" {
+            let user = User(login: "max", fullName: "Max", avatar: UIImage(named: "magic") ?? UIImage(), status: "Active")
+            return user
+        } else {
             return nil
         }
-        return currentUser
     }
 }
