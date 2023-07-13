@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func createTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
         
-        let user = User(login: "max", fullName: "Max", avatar: UIImage(named: "magic")!, status: "active")
+        let user = User(login: "", fullName: "", avatar: UIImage(), status: "")
         let userService = CurrentUserService(currentUser: user)
         
         tabBarController.viewControllers = [

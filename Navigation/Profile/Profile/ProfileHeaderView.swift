@@ -1,11 +1,13 @@
 import UIKit
+import StorageService
 
-final class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
+final class ProfileHeaderView: UIView, UITextFieldDelegate {
 
     static let id = "ProfileHeaderViewID"
-    private let avatarImageView: UIImageView = {
+
+    var avatarImageView: UIImageView = {
         let imageView                        = UIImageView()
-        imageView.image                      = UIImage(named: "avatar")
+        imageView.image                      = UIImage(named: "magic")
         imageView.contentMode                = .scaleAspectFill
         imageView.layer.cornerRadius         = 40
         imageView.layer.masksToBounds        = true
@@ -15,37 +17,23 @@ final class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate 
         return imageView
     }()
 
-    private let fullNameLabel: UILabel = {
+    var fullNameLabel: UILabel = {
         let label                      = UILabel()
-        label.text                     = "Максим"
+        label.text                     = "SuperMax"
         label.font                     = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor                = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let statusLabel: UILabel = {
+    var statusLabel: UILabel = {
         let label                    = UILabel()
-        label.text                   = "В ожидании..."
+        label.text                   = "I do not understand Swift"
         label.font                   = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor              = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    var user: User? {
-            didSet {
-                if let user = user {
-                    fullNameLabel.text = user.fullName
-                    statusLabel.text = user.status
-                    avatarImageView.image = user.avatar
-                } else {
-                    fullNameLabel.text = nil
-                    statusLabel.text = nil
-                    avatarImageView.image = nil
-                }
-            }
-        }
 
     private let statusTextField: UITextField           = {
         let text                                       = UITextField()
@@ -82,16 +70,15 @@ final class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate 
         return button
     }()
 
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureContents()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configureContents() {
 
         addSubview(avatarImageView)

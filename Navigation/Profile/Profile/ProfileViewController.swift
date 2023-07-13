@@ -11,9 +11,12 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Private properties
 
-    
-    private var posts = Source.makePost()
-    private var user: User
+    var posts = Source.makePost()
+    var user: User
+    var userService: UserService
+
+    private var headerView: ProfileHeaderView?
+
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -34,10 +37,12 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Initializer
 
-    init(user: User) {
-        self.user = user
-        super.init(nibName: nil, bundle: nil)
-    }
+    init(userService: UserService) {
+            self.userService = userService
+            self.user = User(login: "", fullName: "", avatar: UIImage(), status: "")
+            super.init(nibName: nil, bundle: nil)
+            self.user = userService.getUser(withLogin: "max") ?? self.user
+        }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -52,6 +57,8 @@ final class ProfileViewController: UIViewController {
         setupView()
         addSubviews()
         setupConstraints()
+        updateUI()
+        tableView.delegate = self
     }
     
     
@@ -60,12 +67,20 @@ final class ProfileViewController: UIViewController {
     private func setupView() {
         #if DEBUG
             view.backgroundColor = .white
+        userService = TestUserService(testUser: User(login: "test", fullName: "test", avatar: UIImage(named: "testuser") ?? UIImage(), status: "testing"))
         #else
             view.backgroundColor = .gray
+            userService = CurrentUserService()
         #endif
         self.navigationController?.navigationBar.isHidden = true
     }
-    
+
+    func updateUI() {
+        headerView!.fullNameLabel.text = user.fullName
+        headerView!.avatarImageView.image = user.avatar
+        headerView!.statusLabel.text = user.status
+    }
+
     private func addSubviews() {
         view.addSubview(tableView)
     }
@@ -102,13 +117,10 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id) as? ProfileHeaderView else {
-                return nil
-            }
-            return header
-        } else {
-            return nil
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id) as? ProfileHeaderView
+            return headerView
         }
+        return nil
     }
 }
 

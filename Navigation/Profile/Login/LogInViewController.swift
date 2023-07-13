@@ -10,7 +10,7 @@ import UIKit
 final class LogInViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Private properties
-    
+
     private let userService: UserService
     private var currentUser: User?
 
@@ -21,7 +21,7 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-    
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +29,7 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    
+
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
@@ -37,7 +37,7 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
         imageView.clipsToBounds = true
         return imageView
     }()
-    
+
     private lazy var loginTextField: UITextField = {
         let loginTextField = UITextField()
         loginTextField.translatesAutoresizingMaskIntoConstraints    = false
@@ -81,9 +81,9 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
         passwordTextField.delegate = self
         return passwordTextField
     }()
-    
-    private let buttonLogIn: CustomButton = {
-        let button = CustomButton()
+
+    private let buttonLogIn: UIButton = {
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log In", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -95,14 +95,14 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
         return button
     }()
 
-    
+
     // MARK: - Lifecycles
-    
+
     init(userService: UserService) {
         self.userService = userService
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -113,23 +113,23 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
         addSubviews()
         setupConstraints()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setupKeyboardObservers()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         removeKeyboardObservers()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupView() {
         view.backgroundColor = .white
     }
-    
+
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(logoImageView)
@@ -138,14 +138,14 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
         stackView.addArrangedSubview(passwordTextField)
         scrollView.addSubview(buttonLogIn)
     }
-    
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
+
             logoImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 120),
             logoImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
@@ -162,7 +162,7 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
             buttonLogIn.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
-    
+
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(
@@ -176,40 +176,38 @@ final class LogInViewController: UIViewController, UIScrollViewDelegate {
             name: UIResponder.keyboardDidHideNotification,
             object: nil)
     }
-    
+
     private func removeKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
-    
+
     @objc func willShowKeyboard(_notification: NSNotification) {
         let keyboardHeight = (_notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
         scrollView.contentInset.bottom += keyboardHeight ?? 0.0
     }
-    
+
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scrollView.contentInset.bottom = 0.0
     }
 
     @objc func logIn(sender: UIButton) {
-            guard let login = loginTextField.text, let user = userService.getUser(withLogin: login) else {
-                let alert = UIAlertController(title: "Unknown login", message: "Please enter a valid login", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                present(alert, animated: true)
-                return
-            }
-
-            currentUser = user
-
-            let profileVC = ProfileViewController(user: user)
-            navigationController?.pushViewController(profileVC, animated: true)
+        guard let login = loginTextField.text, let user = userService.getUser(withLogin: login) else {
+            let alert = UIAlertController(title: "Unknown login", message: "Please enter a valid login", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            present(alert, animated: true)
+            return
         }
-    
+
+        currentUser = user
+
+        let profileVC = ProfileViewController(userService: userService)
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+
 }
 
-
-
-    // MARK: - UITextFieldDelegate
+// MARK: - UITextFieldDelegate
 
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -217,3 +215,4 @@ extension LogInViewController: UITextFieldDelegate {
         return true
     }
 }
+

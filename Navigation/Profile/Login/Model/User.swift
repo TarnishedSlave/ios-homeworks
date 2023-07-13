@@ -10,7 +10,7 @@ import UIKit
 final class User {
     let login: String
     let fullName: String
-    let avatar: UIImage
+    var avatar: UIImage
     var status: String
 
     init(login: String, fullName: String, avatar: UIImage, status: String) {
