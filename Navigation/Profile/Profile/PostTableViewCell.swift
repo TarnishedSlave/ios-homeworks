@@ -6,41 +6,41 @@
 //
 
 import UIKit
+import StorageService
 
 class PostTableViewCell: UITableViewCell {
 
     static let id = "PostTableViewCell"
-    
-    let author: UILabel     = {
-        let label           = UILabel()
-        label.font          = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor     = .black
+    let author: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .black
         label.numberOfLines = 2
         return label
     }()
-    let image: UIImageView    = {
-        let image             = UIImageView()
+    let image: UIImageView = {
+        let image = UIImageView()
         image.backgroundColor = .white
-        image.contentMode     = .scaleAspectFit
+        image.contentMode = .scaleAspectFit
         return image
     }()
     let descriptionLabel: UILabel = {
-        let label                 = UILabel()
-        label.font                = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor           = .systemGray
-        label.numberOfLines       = 0
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .systemGray
+        label.numberOfLines = 0
         return label
     }()
     let likesLabel: UILabel = {
-        let label           = UILabel()
-        label.font          = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor     = .black
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .black
         return label
     }()
     let viewLabel: UILabel = {
-        let label          = UILabel()
-        label.font         = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor    = .black
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .black
         return label
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -81,11 +81,11 @@ class PostTableViewCell: UITableViewCell {
             viewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -16)
         ])
     }
-    func configure(posts: Posts) {
-        author.text           = posts.author
-        image.image           = posts.image
+    func configure(posts: Post) {
+        author.text = posts.author
+        image.image = posts.image
         descriptionLabel.text = posts.description
-        likesLabel.text       = "Likes: \(posts.likes)"
-        viewLabel.text        = "Views: \(posts.view)"
+        likesLabel.text = "Likes: \(posts.likes)"
+        viewLabel.text = "Views: \(posts.view)"
     }
 }

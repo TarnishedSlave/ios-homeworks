@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class PostLogInViewController: UIViewController {
 
@@ -22,7 +23,7 @@ class PostLogInViewController: UIViewController {
         present(infoViewController, animated: true)
     }
     func setupView() {
-        self.view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        self.view.backgroundColor = .red
         self.navigationItem.title = titlePost
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }

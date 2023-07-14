@@ -20,12 +20,11 @@
 		756FD3D229F4C1A3001485A6 /* PostLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FD3D129F4C1A3001485A6 /* PostLogInViewController.swift */; };
 		756FD3D429F4C1C1001485A6 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FD3D329F4C1C1001485A6 /* PostTableViewCell.swift */; };
 		756FD3D629F4C391001485A6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FD3D529F4C391001485A6 /* ProfileViewController.swift */; };
-		756FD3D829F4C500001485A6 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FD3D729F4C500001485A6 /* Source.swift */; };
-		759B36832A38A29800B5F7D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759B36822A38A29800B5F7D5 /* User.swift */; };
 		75BD94B529B8C14C00C8E16F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BD94B429B8C14C00C8E16F /* FeedViewController.swift */; };
 		75BD94BC29B8C3D300C8E16F /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BD94BB29B8C3D300C8E16F /* InfoViewController.swift */; };
-		A401750B2A39F4C50059C825 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A401750A2A39F4C50059C825 /* CustomButton.swift */; };
-		A401750D2A3A07060059C825 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A401750C2A3A07060059C825 /* UserService.swift */; };
+		75E192B92A61907500A97AF9 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E192B82A61907500A97AF9 /* LoginInspector.swift */; };
+		75E192BB2A61908E00A97AF9 /* LoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E192BA2A61908E00A97AF9 /* LoginDelegate.swift */; };
+		75E192BD2A6190E100A97AF9 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E192BC2A6190E100A97AF9 /* Checker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,12 +66,11 @@
 		756FD3D129F4C1A3001485A6 /* PostLogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLogInViewController.swift; sourceTree = "<group>"; };
 		756FD3D329F4C1C1001485A6 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		756FD3D529F4C391001485A6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		756FD3D729F4C500001485A6 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
-		759B36822A38A29800B5F7D5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		75BD94B429B8C14C00C8E16F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		75BD94BB29B8C3D300C8E16F /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		A401750A2A39F4C50059C825 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		A401750C2A3A07060059C825 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		75E192B82A61907500A97AF9 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		75E192BA2A61908E00A97AF9 /* LoginDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDelegate.swift; sourceTree = "<group>"; };
+		75E192BC2A6190E100A97AF9 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +122,6 @@
 		753BFF8329B7249200C40B1A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				A40175092A39F4AE0059C825 /* CustomUI */,
 				A40175012A39F3230059C825 /* Application */,
 				A40175052A39F3980059C825 /* Feed */,
 				A40175042A39F3900059C825 /* Profile */,
@@ -132,15 +129,6 @@
 				756FD3D129F4C1A3001485A6 /* PostLogInViewController.swift */,
 			);
 			path = Navigation;
-			sourceTree = "<group>";
-		};
-		759B36812A38A27700B5F7D5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				759B36822A38A29800B5F7D5 /* User.swift */,
-				A401750C2A3A07060059C825 /* UserService.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		A40175012A39F3230059C825 /* Application */ = {
@@ -165,7 +153,6 @@
 		A40175042A39F3900059C825 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				A40175082A39F3E50059C825 /* Models */,
 				A40175072A39F3A40059C825 /* Profile */,
 				A40175062A39F3A00059C825 /* Login */,
 			);
@@ -184,8 +171,10 @@
 		A40175062A39F3A00059C825 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				759B36812A38A27700B5F7D5 /* Model */,
 				756FD3CF29F4C176001485A6 /* LogInViewController.swift */,
+				75E192B82A61907500A97AF9 /* LoginInspector.swift */,
+				75E192BA2A61908E00A97AF9 /* LoginDelegate.swift */,
+				75E192BC2A6190E100A97AF9 /* Checker.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -198,22 +187,6 @@
 				756FD3D329F4C1C1001485A6 /* PostTableViewCell.swift */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		A40175082A39F3E50059C825 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				756FD3D729F4C500001485A6 /* Source.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		A40175092A39F4AE0059C825 /* CustomUI */ = {
-			isa = PBXGroup;
-			children = (
-				A401750A2A39F4C50059C825 /* CustomButton.swift */,
-			);
-			path = CustomUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,18 +311,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				756FD3D629F4C391001485A6 /* ProfileViewController.swift in Sources */,
+				75E192BB2A61908E00A97AF9 /* LoginDelegate.swift in Sources */,
 				756FD3D429F4C1C1001485A6 /* PostTableViewCell.swift in Sources */,
 				756FD3D029F4C176001485A6 /* LogInViewController.swift in Sources */,
 				753BFF8529B7249200C40B1A /* AppDelegate.swift in Sources */,
 				75BD94BC29B8C3D300C8E16F /* InfoViewController.swift in Sources */,
 				756FD3D229F4C1A3001485A6 /* PostLogInViewController.swift in Sources */,
-				A401750D2A3A07060059C825 /* UserService.swift in Sources */,
-				756FD3D829F4C500001485A6 /* Source.swift in Sources */,
+				75E192B92A61907500A97AF9 /* LoginInspector.swift in Sources */,
 				7540427329C3534300D0D2F0 /* ProfileHeaderView.swift in Sources */,
-				A401750B2A39F4C50059C825 /* CustomButton.swift in Sources */,
 				75BD94B529B8C14C00C8E16F /* FeedViewController.swift in Sources */,
+				75E192BD2A6190E100A97AF9 /* Checker.swift in Sources */,
 				753BFF8729B7249200C40B1A /* SceneDelegate.swift in Sources */,
-				759B36832A38A29800B5F7D5 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

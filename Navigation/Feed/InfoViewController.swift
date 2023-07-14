@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import StorageService
 
 class InfoViewController: UIViewController {
 
     private lazy var button: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .darkGray
+        button.backgroundColor = .red
         button.layer.cornerRadius = 12
         button.setTitle("Редактировать", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -21,7 +22,7 @@ class InfoViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .green
         setupButton()
     }
     private func setupButton() {

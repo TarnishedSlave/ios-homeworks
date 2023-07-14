@@ -6,52 +6,65 @@
 //
 
 import UIKit
+import StorageService
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
-    var window: UIWindow?
-    
+
+        var window: UIWindow?
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = createTabBarController()
-        window?.makeKeyAndVisible()
+        window?.rootViewController =  createTabBarController()
+        let loginViewController = ProfileViewController(userService: CurrentUserService())
+
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = loginViewController
+        self.window = window
+        window.makeKeyAndVisible()
     }
-    
-    func createFeedViewController() -> UINavigationController {
-        let feedViewController = FeedViewController()
-        feedViewController.title = "Feed"
-        feedViewController.tabBarItem = UITabBarItem(
-            title: "Feed",
-            image: UIImage(systemName: "house.fill"),
-            tag: 0
-        )
-        return UINavigationController(rootViewController: feedViewController)
+
+        func createFeedViewController() -> UINavigationController {
+            let feedViewController = FeedViewController()
+            feedViewController.title = "Feed"
+            feedViewController.tabBarItem = UITabBarItem(
+                title: "Feed",
+                image: UIImage(systemName: "house.fill"),
+                tag: 0
+            )
+            return UINavigationController(rootViewController: feedViewController)
+        }
+
+        func createProfileViewController() -> UINavigationController {
+            let logInViewController = LogInViewController(userService: TestUserService(testUser: User(login: "String", fullName: "String", avatar: UIImage(named: "cat") ?? UIImage(), status: "String")))
+            logInViewController.tabBarItem = UITabBarItem(
+                title: "Profile",
+                image: UIImage(systemName: "person.fill"),
+                tag: 1
+            )
+            return UINavigationController(rootViewController: logInViewController)
+        }
+
+        func createTabBarController() -> UITabBarController {
+            let tabBarController = UITabBarController()
+            tabBarController.viewControllers = [createFeedViewController(), createProfileViewController()]
+            UITabBar.appearance().backgroundColor = .systemGray2
+            return tabBarController
+        }
     }
-    
-    func createProfileViewController(userService: UserService) -> UINavigationController {
-        let logInViewController = LogInViewController(userService: userService)
-        logInViewController.tabBarItem = UITabBarItem(
-            title: "Profile",
-            image: UIImage(systemName: "person.fill"),
-            tag: 1
-        )
-        return UINavigationController(rootViewController: logInViewController)
+
+    func sceneDidDisconnect(_ scene: UIScene) {
     }
-    
-    func createTabBarController() -> UITabBarController {
-        let tabBarController = UITabBarController()
-        
-        let user = User(login: "", fullName: "", avatar: UIImage(), status: "")
-        let userService = CurrentUserService(currentUser: user)
-        
-        tabBarController.viewControllers = [
-            createFeedViewController(),
-            createProfileViewController(userService: userService)
-        ]
-        
-        UITabBar.appearance().backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        
-        return tabBarController
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
     }
-}
+
+    func sceneWillResignActive(_ scene: UIScene) {
+    }
+
+    func sceneWillEnterForeground(_ scene: UIScene) {
+    }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+    }
