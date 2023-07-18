@@ -4,7 +4,7 @@ import StorageService
 final class ProfileHeaderView: UIView, UITextFieldDelegate {
 
     let avatarImageView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "cat"))
+        let view = UIImageView(image: UIImage(named: "avatar"))
         view.layer.cornerRadius = 40
         view.clipsToBounds = true
         view.layer.borderWidth = 3

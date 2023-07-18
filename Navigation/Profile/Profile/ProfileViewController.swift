@@ -88,7 +88,7 @@ class ProfileViewController: UIViewController {
 
         #if DEBUG
         view.backgroundColor = .systemPink
-        userService = TestUserService(testUser: User(login: "test", fullName: "Test User", avatar: UIImage(named: "test_avatar") ?? UIImage(), status: "Active"))
+        userService = TestUserService(testUser: User(login: "test", fullName: "Test User", avatar: UIImage(named: "testuser") ?? UIImage(), status: "Still alive"))
         let login = "test"
         #else
         view.backgroundColor = .systemGreen
