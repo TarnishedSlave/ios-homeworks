@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import StorageService
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

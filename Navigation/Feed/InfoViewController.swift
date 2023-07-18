@@ -6,32 +6,50 @@
 //
 
 import UIKit
-import StorageService
 
-class InfoViewController: UIViewController {
-
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .red
-        button.layer.cornerRadius = 12
-        button.setTitle("Редактировать", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .green
-        setupButton()
-    }
-    private func setupButton() {
-        self.view.addSubview(self.button)
+class InfoViewController: UIViewController, UIAlertViewDelegate {
+    private lazy var alertButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Show Alert", for: .normal)
+            button.addTarget(self, action: #selector(didTapAlertButton), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+    @objc private func didTapAlertButton() {
+            let alert = UIAlertController(title: "Hello", message: "Are you ok?", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Yes", style: .default) {
+                UIAlertAction in
+                NSLog("All right")
+            }
+            let cancelAction = UIAlertAction(title: "No", style: .default) {
+                UIAlertAction in
+                NSLog("Needs to be improved")
+            }
+            alert.addAction(cancelAction)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+        }
+    fileprivate func setupConstraints(){
+        let safeAreaLayoutGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            button.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            button.heightAnchor.constraint(equalToConstant: 50)
+            alertButton.leadingAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.leadingAnchor,
+                constant: 20.0
+            ),
+            alertButton.trailingAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.trailingAnchor,
+                constant: -20.0
+            ),
+            alertButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            alertButton.heightAnchor.constraint(equalToConstant: 40.0)
         ])
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemCyan
+        view.addSubview(alertButton)
+        setupConstraints()
+    }
+
 }

@@ -6,63 +6,65 @@
 //
 
 import UIKit
-import StorageService
 
 class FeedViewController: UIViewController {
 
-    private lazy var button1: UIButton = {
-        let button1 = UIButton()
-        button1.backgroundColor = .red
-        button1.layer.cornerRadius = 5
-        button1.setTitle("Пост № 1", for: .normal)
-        button1.setTitleColor(.black, for: .normal)
-        button1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button1.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        return button1
-    }()
-    private lazy var button2: UIButton = {
-        let button2 = UIButton()
-        button2.backgroundColor = .green
-        button2.layer.cornerRadius = 5
-        button2.setTitle("Пост № 2", for: .normal)
-        button2.setTitleColor(.black, for: .normal)
-        button2.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button2.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        return button2
+    private lazy var actionButtonOne: UIButton = {
+        let button = UIButton()
+               button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 15
+               button.setTitle("Пост 1", for: .normal)
+               button.setTitleColor(.white, for: .normal)
+               button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
+        return button
     }()
 
-    private var stackView: UIStackView = {
+    private lazy var actionButtonTwo: UIButton = {
+        let button = UIButton()
+
+               button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 15
+               button.setTitle("Пост 2", for: .normal)
+               button.setTitleColor(.white, for: .normal)
+               button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
+        return button
+    }()
+
+    @objc private func pressedButton() {
+        let postViewController = PostViewController()
+        self.navigationController?.pushViewController(postViewController, animated: true)
+    }
+
+    private lazy var stackView: UIStackView = { [unowned self] in
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.clipsToBounds = true
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .center
-        stackView.spacing = 50
+        stackView.axis = .vertical
+        stackView.spacing = 10.0
+
+        stackView.addArrangedSubview(actionButtonOne)
+        stackView.addArrangedSubview(actionButtonTwo)
+
         return stackView
     }()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .gray
-        view.addSubview(stackView)
-        setupContraints()
-        stackView.addArrangedSubview(self.button1)
-        stackView.addArrangedSubview(self.button2)
-    }
 
-    @objc public func buttonAction() {
-        let postViewController = PostLogInViewController()
-        self.navigationController?.pushViewController(postViewController, animated: true)
-        postViewController.titlePost = publicPost.title
-    }
-
-    private func setupContraints() {
+    private func setupConstrait() {
+        let safeAreaLayoutGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo:  self.view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo:  self.view.trailingAnchor, constant: -20),
-            stackView.heightAnchor.constraint(equalToConstant: 50),
-            stackView.bottomAnchor.constraint(equalTo:  self.view.bottomAnchor, constant: -16),
-            stackView.topAnchor.constraint(equalTo:  self.view.topAnchor, constant: 16)
+            stackView.centerXAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.centerYAnchor)
         ])
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        view.addSubview(stackView)
+        setupConstrait()
+
+    }
+
 }
